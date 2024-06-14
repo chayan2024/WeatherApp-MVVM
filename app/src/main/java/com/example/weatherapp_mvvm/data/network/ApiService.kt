@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("Weather")
-    suspend fun getPosts(): List<Weather>
+    suspend fun getWeather(): List<Weather>
 }
