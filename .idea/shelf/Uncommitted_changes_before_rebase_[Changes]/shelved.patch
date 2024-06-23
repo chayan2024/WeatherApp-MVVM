@@ -1,0 +1,24 @@
+Index: app/src/main/java/com/example/weatherapp_mvvm/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.weatherapp_mvvm\n\nimport android.os.Bundle\nimport androidx.activity.ComponentActivity\nimport androidx.activity.compose.setContent\nimport androidx.compose.foundation.Image\nimport androidx.compose.foundation.layout.Arrangement\nimport androidx.compose.foundation.layout.Column\nimport androidx.compose.foundation.layout.fillMaxSize\nimport androidx.compose.foundation.layout.padding\nimport androidx.compose.foundation.layout.size\nimport androidx.compose.material3.MaterialTheme\nimport androidx.compose.material3.Surface\nimport androidx.compose.material3.Text\nimport androidx.compose.runtime.Composable\nimport androidx.compose.runtime.LaunchedEffect\nimport androidx.compose.runtime.getValue\nimport androidx.compose.runtime.livedata.observeAsState\nimport androidx.compose.ui.Alignment\nimport androidx.compose.ui.Modifier\nimport androidx.compose.ui.layout.ContentScale\nimport androidx.compose.ui.res.painterResource\nimport androidx.compose.ui.text.font.FontWeight\nimport androidx.compose.ui.text.style.TextAlign\nimport androidx.compose.ui.tooling.preview.Preview\nimport androidx.compose.ui.unit.dp\nimport androidx.compose.ui.unit.sp\nimport androidx.hilt.navigation.compose.hiltViewModel\nimport coil.compose.rememberImagePainter\nimport com.example.weatherapp_mvvm.model.WeatherResponse\nimport com.example.weatherapp_mvvm.ui.theme.WeatherAppMVVMTheme\nimport com.example.weatherapp_mvvm.viewmodel.WeatherViewModel\nimport dagger.hilt.android.AndroidEntryPoint\n\n@AndroidEntryPoint\nclass MainActivity : ComponentActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContent {\n            WeatherAppMVVMTheme {\n                // A surface container using the 'background' color from the theme\n                Surface(\n                    modifier = Modifier.fillMaxSize(),\n                    color = MaterialTheme.colorScheme.background\n                ) {\n                    WeatherScreen()\n                }\n            }\n        }\n    }\n}\n\n@Composable\nfun WeatherScreen(viewModel: WeatherViewModel = hiltViewModel()) {\n    val latitude = 41.414116\n    val longitude = -73.303566\n    val exclude = \"part\"\n    val appid = \"c9085a65eba47dfc2f82d0f842d778de\"\n\n    val weatherResponse by viewModel.weatherResponse.observeAsState()\n\n    LaunchedEffect(Unit) {\n        viewModel.fetchWeather(latitude, longitude, exclude, appid)\n    }\n\n    Column(\n        modifier = Modifier\n            .fillMaxSize()\n            .padding(16.dp),\n        verticalArrangement = Arrangement.Center,\n        horizontalAlignment = Alignment.CenterHorizontally\n    ) {\n        if (weatherResponse != null) {\n            WeatherInfo(weatherResponse!!)\n        } else {\n            Text(\"Loading...\", fontSize = 20.sp, fontWeight = FontWeight.Bold)\n        }\n    }\n}\n@Composable\nfun WeatherInfo(weather: WeatherResponse) {\n    val weatherIconUrl = \"https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png\"\n\n    Column(\n        horizontalAlignment = Alignment.CenterHorizontally,\n        verticalArrangement = Arrangement.Center\n    ) {\n        Text(\n            text = weather.name,\n            fontSize = 24.sp,\n            fontWeight = FontWeight.Bold,\n            textAlign = TextAlign.Center\n        )\n\n        Text(\n            text = \"${weather.main.temp}°C\",\n            fontSize = 32.sp,\n            fontWeight = FontWeight.Bold\n        )\n        Text(\n            text = weather.weather[0].description,\n            fontSize = 20.sp,\n            fontWeight = FontWeight.Medium,\n            textAlign = TextAlign.Center\n        )\n    }\n}\n\n@Preview(showBackground = true)\n@Composable\nfun GreetingPreview() {\n    WeatherAppMVVMTheme {\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/weatherapp_mvvm/MainActivity.kt b/app/src/main/java/com/example/weatherapp_mvvm/MainActivity.kt
+--- a/app/src/main/java/com/example/weatherapp_mvvm/MainActivity.kt	(revision aae532af01c08929f248f5298002a32a0fe7e339)
++++ b/app/src/main/java/com/example/weatherapp_mvvm/MainActivity.kt	(date 1719160679691)
+@@ -103,6 +103,13 @@
+             fontWeight = FontWeight.Medium,
+             textAlign = TextAlign.Center
+         )
++
++        Text(
++            text = weather.weather[0].icon,
++            fontSize = 20.sp,
++            fontWeight = FontWeight.Medium,
++            textAlign = TextAlign.Center
++        )
+     }
+ }
+ 
