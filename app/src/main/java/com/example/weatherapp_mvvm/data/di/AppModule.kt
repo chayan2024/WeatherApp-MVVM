@@ -16,12 +16,13 @@ object AppModule {
     @Singleton
     fun getRetrofitBuilder(): Retrofit {
         return Retrofit.Builder()
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
     @Provides
     @Singleton
-    fun getBaseURl():String="https://api.openweathermap.org/data/2.5/weather?"
+    fun getBaseURl():String="https://api.openweathermap.org/data/2.5/"
 
     @Provides
     @Singleton
