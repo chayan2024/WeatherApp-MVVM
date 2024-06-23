@@ -1,4 +1,5 @@
 package com.example.weatherapp_mvvm.model
 
-class Weather {
-}
+data class Clouds(
+    val all: Int
+)
