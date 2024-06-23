@@ -1,6 +1,4 @@
 package com.example.weatherapp_mvvm.data.network
-
-
 import com.example.weatherapp_mvvm.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.http.GET
